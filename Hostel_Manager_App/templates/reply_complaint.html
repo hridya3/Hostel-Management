@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reply to Complaint - Hridayam Hostel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f6e2c6;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding-top: 80px;
+      color: #4b2e05;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #4b2e05;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 2rem;
+    }
+
+    nav img {
+      width: 45px;
+      height: 45px;
+      margin-right: 10px;
+    }
+
+    nav strong {
+      color: #f6e2c6;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-pills .nav-link {
+      color: #f6e2c6 !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-pills .nav-link:hover {
+      color: #ffd699 !important;
+      transform: scale(1.05);
+    }
+
+    /* Card Container */
+    .reply-container {
+      background-color: #fff8f1;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(139, 69, 19, 0.25);
+      padding: 30px 40px;
+      width: 90%;
+      max-width: 700px;
+      margin: 40px auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .reply-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(139, 69, 19, 0.35);
+    }
+
+    h2 {
+      text-align: center;
+      color: #5c2e00;
+      font-weight: 700;
+      text-shadow: 1px 1px #ffe6cc;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #5a3c2a;
+      margin: 5px 0;
+    }
+
+    b {
+      color: #4b2e05;
+    }
+
+    textarea, select {
+      width: 100%;
+      border: 1.5px solid #b88b4a;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #fffdf8;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    textarea:focus, select:focus {
+      border-color: #8b5e3b;
+      box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+      outline: none;
+    }
+
+    button {
+      background-color: #8b5e3b;
+      color: white;
+      font-weight: 600;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+
+    button:hover {
+      background-color: #6f4223;
+      transform: translateY(-2px);
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #8b5e3b;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: #5c3d2e;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_admin_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam </strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_admin_view' %}">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Reply Section -->
+  <div class="reply-container">
+    <h2>Reply to Complaint</h2>
+    <p><b>Student:</b> {{ complaint.student.name }}</p>
+    <p><b>Title:</b> {{ complaint.title }}</p>
+    <p><b>Description:</b> {{ complaint.description }}</p>
+
+    <form method="POST">
+      {% csrf_token %}
+      <textarea name="reply" placeholder="Write your reply here..." rows="4" required>{{ complaint.reply }}</textarea>
+      <select name="status" required>
+        <option value="Pending" {% if complaint.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="In Progress" {% if complaint.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Resolved" {% if complaint.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+      </select>
+      <button type="submit">Submit Reply</button>
+    </form>
+
+    <a href="{% url 'admin_complaints' %}" class="back-link">Back to Complaints</a>
+  </div>
+</body>
+</html>

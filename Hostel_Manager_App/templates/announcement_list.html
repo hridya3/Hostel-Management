@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        background-color: #f6e2c6;
+        font-family: 'Poppins', sans-serif;
+        padding: 40px;
+        text-align: center;
+        margin-top: 5%;
+    }
+      /* Navbar Styling */
+  nav {
+    background-color: #4b2e05;
+    color: #f6e2c6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  nav .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f6e2c6;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  nav .navbar-brand img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  nav .navbar-brand:hover img {
+    transform: scale(1.1);
+  }
+
+  .nav-pills {
+    margin-bottom: 0;
+  }
+
+  .nav-pills .nav-link {
+    color: #f6e2c6;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+
+  .nav-pills .nav-link:hover {
+    color: #ffd699;
+    transform: scale(1.05);
+  }
+
+
+    h2 {
+        color: brown;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+
+    .announcement-card {
+        background-color: #fff8f0;
+        border: 2px solid #a0522d;
+        border-radius: 12px;
+        width: 60%;
+        margin: 20px auto;
+        padding: 25px;
+        text-align: left;
+        box-shadow: 0 4px 12px rgba(165, 42, 42, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .announcement-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(165, 42, 42, 0.4);
+    }
+
+    .announcement-card h3 {
+        color: brown;
+        font-weight: bold;
+    }
+
+    .announcement-card p {
+        color: #5c4033;
+        margin: 10px 0;
+    }
+
+    .announcement-card small {
+        color: #7a4b2a;
+        font-style: italic;
+    }
+
+    .btn-custom {
+        background-color: brown;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .btn-custom:hover {
+        background-color: #8b4513;
+        color: white;
+    }
+</style>
+
+<body>
+      <!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_admin_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam</strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_admin_view' %}">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+    <h2>Latest Announcements</h2>
+
+    {% for a in announcements %}
+        <div class="announcement-card">
+            <h3>{{ a.title }}</h3>
+            <p>{{ a.message }}</p>
+            <small>Posted on: {{ a.date_posted }}</small>
+            <a href="{% url 'delete_announcements' a.id %}" class="btn btn-danger btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
+            <a href="{% url 'update_announcements' a.id %}" class="btn btn-danger ">Edit</a>
+        </div>
+    {% empty %}
+        <p style="color: brown; font-weight: bold;">No announcements yet.</p>
+    {% endfor %}
+
+    <br>
+    <a href="{% url 'announcement_create_view' %}" class="btn-custom">+ Add New Announcement</a>
+    <a href="{% url 'hostel_admin_view' %}" class="btn-custom">Back to Admin Dashboard</a>
+</body>
+</html>

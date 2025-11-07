@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mess Menu | Hridayam Hostel</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      background-color: #f6e9d5;
+      font-family: "Poppins", sans-serif;
+      color: #3e2a19;
+      padding: 20px;
+    }
+    /* Navbar */
+          nav {
+    background-color: #4b2e05;
+    color: #f6e2c6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  nav .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f6e2c6;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  nav .navbar-brand img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  nav .navbar-brand:hover img {
+    transform: scale(1.1);
+  }
+
+  .nav-pills {
+    margin-bottom: 0;
+  }
+
+  .nav-pills .nav-link {
+    color: #f6e2c6;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+
+  .nav-pills .nav-link:hover {
+    color: #ffd699;
+    transform: scale(1.05);
+  }
+
+    .menu-container {
+      max-width: 900px;
+      margin-top: 5%;
+      margin-left: 15% ;
+      background-color: #fff9f3;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4b2e05;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .day-card {
+      background-color: #f8ece0;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      padding: 20px;
+    }
+
+    .day-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .day-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #3e1f07;
+      margin-bottom: 10px;
+    }
+
+    .meal {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #dec5a3;
+      padding: 5px 0;
+    }
+
+    .meal:last-child {
+      border-bottom: none;
+    }
+
+    .meal span:first-child {
+      font-weight: 500;
+    }
+
+    .btn-back {
+      display: inline-block;
+      background-color: #4b2e05;
+      color: #f6e9d5;
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-back:hover {
+      background-color: #7c4a12;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_student_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam</strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_student_view' %}">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="menu-container">
+    <h1>Weekly Mess Menu </h1>
+
+    <!-- Monday -->
+    <div class="day-card">
+      <div class="day-title">Monday</div>
+      <div class="meal"><span>Breakfast</span><span>Idli & Sambar</span></div>
+      <div class="meal"><span>Lunch</span><span>Rice, Sambar, Beans Poriyal</span></div>
+      <div class="meal"><span>Dinner</span><span>Chapati & Veg Curry</span></div>
+    </div>
+
+    <!-- Tuesday -->
+    <div class="day-card">
+      <div class="day-title">Tuesday</div>
+      <div class="meal"><span>Breakfast</span><span>Poori & Masala</span></div>
+      <div class="meal"><span>Lunch</span><span>Lemon Rice & Papad</span></div>
+      <div class="meal"><span>Dinner</span><span>Fried Rice & Manchurian</span></div>
+    </div>
+
+    <!-- Wednesday -->
+    <div class="day-card">
+      <div class="day-title">Wednesday</div>
+      <div class="meal"><span>Breakfast</span><span>Upma & Coconut Chutney</span></div>
+      <div class="meal"><span>Lunch</span><span>Curd Rice, Pickle</span></div>
+      <div class="meal"><span>Dinner</span><span>Paneer Butter Masala & Chapati</span></div>
+    </div>
+
+    <!-- Thursday -->
+    <div class="day-card">
+      <div class="day-title">Thursday</div>
+      <div class="meal"><span>Breakfast</span><span>Dosa & Chutney</span></div>
+      <div class="meal"><span>Lunch</span><span>Tamarind Rice, Rasam</span></div>
+      <div class="meal"><span>Dinner</span><span>Veg Biryani & Raita</span></div>
+    </div>
+
+    <!-- Friday -->
+    <div class="day-card">
+      <div class="day-title">Friday</div>
+      <div class="meal"><span>Breakfast</span><span>Pongal & Vada</span></div>
+      <div class="meal"><span>Lunch</span><span>Rice, Dal, Potato Fry</span></div>
+      <div class="meal"><span>Dinner</span><span>Chapati & Chicken Curry</span></div>
+    </div>
+
+    <!-- Saturday -->
+    <div class="day-card">
+      <div class="day-title">Saturday</div>
+      <div class="meal"><span>Breakfast</span><span>Bread & Jam</span></div>
+      <div class="meal"><span>Lunch</span><span>Vegetable Pulao & Raita</span></div>
+      <div class="meal"><span>Dinner</span><span>Egg Curry & Rice</span></div>
+    </div>
+
+    <!-- Sunday -->
+    <div class="day-card">
+      <div class="day-title">Sunday</div>
+      <div class="meal"><span>Breakfast</span><span>Pancakes & Honey</span></div>
+      <div class="meal"><span>Lunch</span><span>Chicken Biryani & Salad</span></div>
+      <div class="meal"><span>Dinner</span><span>Chappathi & Veg Kurma</span></div>
+    </div>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'hostel_student_view' %}" class="btn-back"> Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

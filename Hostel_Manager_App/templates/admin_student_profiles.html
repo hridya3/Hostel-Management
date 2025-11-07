@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Gender</th>
+      <th>Phone</th>
+      <th>DOB</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in profiles %}
+      <tr>
+        <td>{{ p.student.name }}</td>
+        <td>{{ p.student.email }}</td>
+        <td>{{ p.gender }}</td>
+        <td>{{ p.phone }}</td>
+        <td>{{ p.dob }}</td>
+        <td>{{ p.address }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

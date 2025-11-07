@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Hridayam Hostel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* ====== GLOBAL COLOR PALETTE ====== */
+    :root {
+      --coffee-dark: #3C1F0D;
+      --coffee-medium: #7B3F00;
+      --coffee-accent: #B25E36;
+      --cream-bg: #F7F3EF;
+      --text-dark: #2C2C2C;
+      --white: #ffffff;
+    }
+
+    body {
+      background-color: #F7F3EF;
+      color: #2C1E3D;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Navbar */
+        /* ====== NAVBAR ====== */
+    nav {
+      background-color: var(--coffee-dark);
+      padding: 15px 40px;
+    }
+
+    .navbar-brand strong {
+      color: var(--white);
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      margin-left: 10px;
+    }
+
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--coffee-accent) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Header */
+    .gallery-header {
+      text-align: center;
+      padding: 50px 20px 20px;
+    }
+    .gallery-header h2 {
+      font-weight: 700;
+      color: #8C4A24;
+    }
+    .gallery-header p {
+      color: #5A4C4C;
+      font-size: 1.1rem;
+    }
+
+    /* Gallery section (same card feel as About) */
+    .gallery-section {
+      background-color: #F7F3EF;
+      border: 3px solid #8C4A24;
+      border-radius: 20px;
+      padding: 50px;
+      margin: 40px auto;
+      width: 85%;
+      box-shadow: 0px 4px 10px rgba(165, 42, 42, 0.3);
+    }
+
+    .gallery-card {
+      background-color: #FFF8F0;
+      border: 2px solid #8C4A24;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .gallery-card img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      border-bottom: 2px solid #8C4A24;
+    }
+    .gallery-card h5 {
+      padding: 10px;
+      color: #2C1E3D;
+      font-weight: 600;
+    }
+    .gallery-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background-color: var(--coffee-dark);
+      text-align: center;
+      padding: 25px;
+      color: var(--white);
+      margin-top: 60px;
+      border-top: 3px solid var(--coffee-accent);
+    }
+
+    footer a {
+      text-decoration: none;
+      color: var(--coffee-accent);
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg px-3">
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <strong>
+        <img src="{% static 'images/hridhayam logo.png' %}" alt="Hridayam Logo" style="height: 50px;">
+        Hridayam Hostel
+      </strong>
+    </a>
+    <div class="ms-auto">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a class="nav-link" href="{% url 'about_view' %}">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'gallery_main_view' %}">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contact_view' %}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'login_view' %}">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="gallery-header">
+    <h2>Our Hostel Gallery</h2>
+    <p>Experience the comfort, warmth, and care at Hridayam Hostel</p>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="gallery-section">
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="gallery-card">
+          <img src="{% static 'images/Hostel-Room-scaled.webp' %}" alt="Room">
+          <h5>Spacious Rooms</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-card">
+          <img src="{% static 'images/mess_hall.jpg' %}" alt="Mess Hall">
+          <h5>Hygienic Dining Hall</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-card">
+          <img src="{% static 'images/study_area.jpg' %}" alt="Study Area">
+          <h5>Quiet Study Spaces</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-card">
+          <img src="{% static 'images/warden_office.jpg' %}" alt="Warden Office">
+          <h5>Warden Office</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-card">
+          <img src="{% static 'images/security.jpg' %}" alt="Security">
+          <h5>24/7 Security</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-card">
+          <img src="{% static 'images/celebration.jpg' %}" alt="Celebration">
+          <h5>Festive Celebrations</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Hridayam Hostel | Designed with ❤️ for comfort and care</p>
+  </footer>
+</body>
+</html>

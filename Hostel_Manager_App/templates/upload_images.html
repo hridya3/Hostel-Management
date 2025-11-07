@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Hostel Image - Hridayam Hostel</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #8C4A24;   /* Coffee brown */
+      --secondary-color: #C59D7B; /* Light cream brown */
+      --bg-light: #FFF8F0;
+      --text-dark: #3E2723;
+      --accent: #E97C35;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      margin: 0;
+      overflow-x: hidden;
+      padding-top: 10px;
+    }
+
+    /* ===== Navbar ===== */
+  /* Navbar Styling */
+  nav {
+    background-color: #4b2e05;
+    color: #f6e2c6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  nav .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f6e2c6;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  nav .navbar-brand img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  nav .navbar-brand:hover img {
+    transform: scale(1.1);
+  }
+
+  .nav-pills {
+    margin-bottom: 0;
+  }
+
+  .nav-pills .nav-link {
+    color: #f6e2c6;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+
+  .nav-pills .nav-link:hover {
+    color: #ffd699;
+    transform: scale(1.05);
+  }
+
+    /* ===== Upload Card ===== */
+    .upload-container {
+      background-color: #fff7ef;
+      border: 2px solid var(--primary-color);
+      border-radius: 15px;
+      padding: 40px;
+      width: 420px;
+      margin: 80px auto;
+      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .upload-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(139, 69, 19, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      font-weight: 700;
+      text-shadow: 1px 1px var(--secondary-color);
+    }
+
+    form {
+      text-align: left;
+    }
+
+    label {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .form-control {
+      border: 1.5px solid var(--primary-color);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background-color: #fff8f2;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 5px rgba(233, 124, 53, 0.5);
+    }
+
+    button {
+      width: 100%;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background-color: #d86c00;
+      transform: scale(1.05);
+    }
+
+    .link {
+      display: block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .link:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_admin_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam </strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_admin_view' %}">Home</a></li>
+      <!-- <li class="nav-item"><a class="nav-link" href="{% url 'gallery_view' %}">Gallery</a></li> -->
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="upload-container">
+    <h2> Upload Hostel Image</h2>
+
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ forms.as_p }}
+      <button type="submit">Upload</button>
+    </form>
+
+    <a href="{% url 'image_list_admin' %}" class="link">View Uploaded Images</a>
+    <a href="{% url 'hostel_admin_view' %}" class="link">Back to Admin Dashboard</a>
+  </div>
+</body>
+</html>

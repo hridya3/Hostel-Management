@@ -1,0 +1,362 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | Hridayam Hostel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #8C4A24;   /* Coffee brown */
+      --secondary-color: #C59D7B; /* Light cream-brown */
+      --bg-light: #FFF8F0;        /* Cream */
+      --text-dark: #3E2723;
+      --text-light: #7B5E57;
+      --card-bg: #FFF3E6;
+    }
+
+    body {
+      background-color: #f9f4ef;
+      font-family: 'Poppins', sans-serif;
+      color: #4b2e05;
+      overflow-x: hidden;
+    }
+    /* Navbar */
+      nav {
+    background-color: #4b2e05;
+    color: #f6e2c6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  nav .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f6e2c6;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  nav .navbar-brand img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  nav .navbar-brand:hover img {
+    transform: scale(1.1);
+  }
+
+  .nav-pills {
+    margin-bottom: 0;
+  }
+
+  .nav-pills .nav-link {
+    color: #f6e2c6;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+
+  .nav-pills .nav-link:hover {
+    color: #ffd699;
+    transform: scale(1.05);
+  }
+
+    /* Sidebar */
+    /* ===== Sidebar ===== */
+    .side {
+      width: 240px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 25px 15px;
+      box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 70px;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      transition: transform 0.4s ease;
+      z-index: 999;
+    }
+
+    .side.collapsed {
+      transform: translateX(-100%);
+    }
+
+    .side a {
+      display: block;
+      color: #FFF8F0;
+      font-weight: 500;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .side a:hover {
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+    /* Main content */
+    .main-content {
+      flex: 1;
+      margin-top: 5%;
+      margin-left: 240px;
+      padding: 50px;
+      animation: fadeIn 0.8s ease;
+      transition: margin-left 0.4s ease;
+    }
+
+    .main-content.expanded {
+      margin-left: 0;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg, #f5deb3, #c69b7b);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .welcome h2 {
+      font-weight: bold;
+      color: #4b2e05;
+    }
+
+    /* Dashboard cards */
+    .card {
+      border: none;
+      border-radius: 15px;
+      height: 200px;
+      background-color: #fff7ed;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .card h5 {
+      color: #4b2e05;
+      font-weight: 600;
+    }
+
+    .icon {
+      font-size: 2.2rem;
+      color: #b46a28;
+      margin-bottom: 10px;
+    }
+
+    /* footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #d7b899;
+      color: #4b2e05;
+      border-radius: 15px;
+      margin-top: 40px;
+    }
+ */
+    /* Announcements */
+    .announcement-card {
+        background-color: #fff8f0;
+        border: 2px solid #a0522d;
+        border-radius: 12px;
+        width: 60%;
+        margin: 20px auto;
+        padding: 25px;
+        text-align: left;
+        box-shadow: 0 4px 12px rgba(165, 42, 42, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .announcement-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(165, 42, 42, 0.4);
+    }
+
+    .announcement-card h3 {
+        color: brown;
+        font-weight: bold;
+    }
+
+    .announcement-card p {
+        color: #5c4033;
+        margin: 10px 0;
+    }
+
+    .announcement-card small {
+        color: #7a4b2a;
+        font-style: italic;
+    }
+
+    .btn-custom {
+        background-color: brown;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .btn-custom:hover {
+        background-color: #8b4513;
+        color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .col-md-4 a button{
+      background-color: #7a4b2a;
+      color: #f6e2c6;
+    }
+
+    /* Popup */
+    /* <style>
+  #toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+  }
+
+  .toast-message {
+    background-color: #4b2e05; /* coffee brown */
+    /* color: #f6e2c6; /* cream text */
+    /* padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    animation: fadeInOut 3s ease forwards;
+    font-weight: 500;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10%, 90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+  } */ 
+  </style>
+</head>
+
+<body>
+<!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_student_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam</strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_student_view' %}">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container-flex">
+    <!-- Sidebar -->
+    <div class="side" id="sidebar">
+      <a href="">Dashboard</a>
+      <a href="{% url 'student_profile' %}">My Profile</a>
+      <a href="{% url 'student_complaints' %}">Complaints</a>
+      <a href="{% url 'student_announcement_list_view' %}">Announcements</a>
+    </div>
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="welcome">
+      <h2>Welcome, {{ request.session.mail }}</h2>
+      <p>Room No: {{ request.session.roomnumber }} | Hostel: Hridayam Hostel</p>
+    </div>
+
+    <!-- Dashboard cards -->
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card p-3 text-center">
+          <i class="bi bi-cash-coin icon"></i>
+          <h5> Cleaning Request</h5>
+          <form method="POST" action="{% url 'request_cleaning' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-lg" style="background-color:#8C4A24; color:white; border-radius:12px; padding:12px 25px;">Click Here</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 text-center">
+          <i class="bi bi-people icon"></i>
+          <h5>Maintanence Request</h5>
+          <form method="POST" action="{% url 'request_maintenance' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-lg" style="background-color:#8C4A24; color:white; border-radius:12px; padding:12px 25px;">Click Here</button>
+          </form>        
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 text-center">
+          <i class="bi bi-cup-hot icon"></i>
+          <h5>Mess Menu</h5>
+          <a href="{% url 'mess_menu' %}"><button type="submit" class="btn btn-lg" style="background-color:#8C4A24; color:white; border-radius:12px; padding:12px 25px;">Click Here</button></a>
+        </div>
+      </div>
+
+    </div>
+<br><br>
+  
+    <h2>Latest Announcements</h2>
+
+    {% for a in announcements %}
+        <div class="announcement-card">
+            <h3>{{ a.title }}</h3>
+            <p>{{ a.message }}</p>
+            <small>Posted on: {{ a.date_posted }}</small>
+        </div>
+    {% empty %}
+        <p style="color: brown; font-weight: bold;">No announcements yet.</p>
+    {% endfor %}
+
+    <br>
+    
+
+    <!-- Footer -->
+    <!-- <footer>
+      <p>© 2025 Hridayam Hostel | Designed for comfort & community 💖</p>
+    </footer> -->
+  </div>
+  <!-- {% if messages %}
+    <script>
+      {% for message in messages %}
+        alert("{{ message }}");
+      {% endfor %}
+    </script>
+  {% endif %} -->
+</body>
+</html>

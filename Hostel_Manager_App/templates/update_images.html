@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Image</title>
+  <style>
+    body {
+      background-color: #f7f3ef;
+      font-family: "Poppins", sans-serif;
+      color: #3b2f2f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .update-container {
+      background: #fff7f0;
+      border: 1px solid #d2b48c;
+      border-radius: 16px;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 4px 15px rgba(120, 90, 50, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .update-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(90, 60, 30, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4b3832;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    select,
+    textarea {
+      padding: 10px;
+      border: 1px solid #c2a67b;
+      border-radius: 8px;
+      background: #fffaf5;
+      font-size: 14px;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #b08b5b;
+      background-color: #fff3e6;
+    }
+
+    button {
+      background-color: #6f4e37;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #8b5a2b;
+      transform: translateY(-2px);
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #6f4e37;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: #a0522d;
+    }
+  </style>
+</head>
+<body>
+  <div class="update-container">
+    <h2>Update Image</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'image_list_admin' %}" class="back-link">← Back to Gallery</a>
+  </div>
+</body>
+</html>

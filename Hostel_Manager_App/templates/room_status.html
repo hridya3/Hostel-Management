@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Status - Hridayam Hostel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #f5e2c8;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #4e2c18;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav img {
+      height: 50px;
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    nav img:hover {
+      transform: scale(1.05);
+    }
+
+    nav strong {
+      color: #fff3e0;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      margin: 0;
+    }
+
+    nav .nav-link {
+      color: #ffe0b2 !important;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav .nav-link:hover {
+      color: #ffffff !important;
+      transform: scale(1.05);
+    }
+
+    /* Page Content */
+    .content {
+      margin-top: 100px;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #4e2c18;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 85%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: #fff8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(165, 42, 42, 0.3);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid #deb887;
+    }
+
+    th {
+      background-color: #8b4513;
+      color: #fff3e0;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f5e1c8;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom {
+      background-color: #8b4513;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 30px;
+      display: inline-block;
+      transition: 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #a0522d;
+      transform: scale(1.05);
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_admin_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam</strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_admin_view' %}">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Room Availability Status</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Room Type</th>
+          <th>Total Rooms</th>
+          <th>Fully Occupied</th>
+          <th>Partially Filled</th>
+          <th>Available</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in room_data %}
+        <tr>
+          <td>{{ r.roomtype }}</td>
+          <td>{{ r.total_rooms }}</td>
+          <td>{{ r.fully_occupied }}</td>
+          <td>{{ r.partially_filled }}</td>
+          <td>{{ r.available_rooms }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="{% url 'hostel_admin_view' %}" class="btn-custom">Back to Admin Dashboard</a>
+  </div>
+
+</body>
+</html>

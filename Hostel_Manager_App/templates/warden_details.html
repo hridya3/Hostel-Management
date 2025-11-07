@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+        body{
+        margin: 2%;
+        background-color: bisque;
+        text-align: center;
+    }
+    table{
+        margin-left: 5% ;
+        border: 2px solid brown;
+        text-align: center;
+    }
+    th, td {
+        border: 1px solid brown;    /* borders for each cell */
+        padding: 8px;               /* adds space inside cells */
+    }
+
+    th {
+        background-color: bisque;   /* optional: header color */
+        color: brown;
+    }
+    tr:hover{
+        background-color: beige;
+    }
+
+</style>
+<body>
+    <a href="{% url 'warden_registration_view' %}">Warden Registration</a>
+    <h1>Warden Details</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Phone Number</th>
+        </tr>
+        {% for i in wardens %}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.age}}</td>
+            <td>{{i.address}}</td>
+            <td>{{i.gender}}</td>
+            <td>{{i.phone}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

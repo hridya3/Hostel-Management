@@ -1,0 +1,272 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Hridayam Hostel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lora:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* ====== GLOBAL COLOR PALETTE ====== */
+    :root {
+      --coffee-dark: #3C1F0D;
+      --coffee-medium: #7B3F00;
+      --coffee-accent: #B25E36;
+      --cream-bg: #F7F3EF;
+      --text-dark: #2C2C2C;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--cream-bg);
+      color: var(--text-dark);
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* ====== NAVBAR ====== */
+    nav {
+      background-color: var(--coffee-dark);
+      padding: 15px 40px;
+    }
+
+    .navbar-brand strong {
+      color: var(--white);
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      margin-left: 10px;
+    }
+
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--coffee-accent) !important;
+      transform: translateY(-2px);
+    }
+
+    /* ====== ABOUT SECTIONS ====== */
+    .about-section {
+      background-color: var(--white);
+      border: 2px solid var(--coffee-accent);
+      border-radius: 18px;
+      padding: 50px;
+      margin: 60px auto;
+      width: 85%;
+      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      color: var(--coffee-dark);
+    }
+
+    .about-section p {
+      text-align: justify;
+      line-height: 1.8;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    /* ====== VALUES SECTION ====== */
+    .values {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .value-box {
+      background-color: var(--cream-bg);
+      border: 2px solid var(--coffee-medium);
+      border-radius: 10px;
+      width: 260px;
+      text-align: center;
+      padding: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .value-box:hover {
+      transform: scale(1.05);
+      background-color: var(--coffee-accent);
+      color: var(--white);
+    }
+
+    .value-box h4 {
+      font-family: 'Lora', serif;
+      color: var(--coffee-dark);
+      margin-bottom: 10px;
+    }
+
+    .value-box p {
+      font-size: 0.95rem;
+    }
+
+    /* ====== FACILITIES SECTION ====== */
+    
+    .facilities {
+      margin: 60px auto;
+      width: 85%;
+    }
+
+    .facility-card {
+      background-color: var(--white);
+      border: 2px solid var(--coffee-accent);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+      height: 220px; /* ✅ Fixed height for equal size */
+      display: flex; 
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .facility-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .facility-card h5 {
+      color: var(--coffee-accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .facility-card p {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background-color: var(--coffee-dark);
+      text-align: center;
+      padding: 25px;
+      color: var(--white);
+      margin-top: 60px;
+      border-top: 3px solid var(--coffee-accent);
+    }
+
+    footer a {
+      text-decoration: none;
+      color: var(--coffee-accent);
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .about-section { width: 90%; padding: 30px; }
+      .value-box { width: 90%; }
+      .facilities .col-md-3 { margin-bottom: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg px-3">
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <strong>
+        <img src="{% static 'images/hridhayam logo.png' %}" alt="Hridayam Logo" style="height: 50px;">
+        Hridayam Hostel
+      </strong>
+    </a>
+    <div class="ms-auto">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a class="nav-link" href="{% url 'about_view' %}">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'gallery_main_view' %}">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contact_view' %}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'login_view' %}">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <div class="about-section">
+    <h2 class="section-title">About Hridayam Hostel</h2>
+    <p>
+      <strong>Hridayam Hostel</strong> is a peaceful and secure living space designed to provide students and working professionals with a home-like environment.
+      Our goal is to combine comfort, safety, and convenience under one roof — a place where residents can focus on their growth, studies, and dreams without worrying about daily hassles.
+      <br><br>
+      At Hridayam, we believe in offering not just accommodation, but a nurturing community. With hygienic food, well-furnished rooms, round-the-clock security, and a supportive warden staff,
+      we ensure that your stay is both pleasant and productive.
+    </p>
+  </div>
+
+  <!-- Mission Vision Values -->
+  <div class="about-section">
+    <h2 class="section-title">Our Mission, Vision & Values</h2>
+    <div class="values">
+      <div class="value-box">
+        <h4> Mission</h4>
+        <p>To provide a safe, hygienic, and comfortable stay for all residents while fostering a friendly and disciplined environment.</p>
+      </div>
+      <div class="value-box">
+        <h4> Vision</h4>
+        <p>To be the most trusted and preferred hostel that sets benchmarks for quality living and service excellence.</p>
+      </div>
+      <div class="value-box">
+        <h4> Values</h4>
+        <p>Safety, Integrity, Respect, Comfort, and Community.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Facilities Section -->
+  <div class="facilities">
+    <h2 class="section-title">Facilities We Offer</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-3">
+        <div class="facility-card">
+          <h5> Spacious Rooms</h5>
+          <p>Well-ventilated rooms with personal storage and study areas.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="facility-card">
+          <h5> Water Facility</h5>
+          <p>24/7 purified drinking water and hot water availability.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="facility-card">
+          <h5> Hygienic Food</h5>
+          <p>Nutritious meals prepared with utmost cleanliness in our in-house mess.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="facility-card">
+          <h5>Security</h5>
+          <p>24x7 CCTV surveillance and dedicated warden support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Hridayam Hostel | Designed with ❤️ for comfort and safety</p>
+  </footer>
+</body>
+</html>

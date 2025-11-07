@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        text-align: center;
+        background-color: bisque;
+    }
+    form{
+        border: 2px solid brown;
+        width: 50%;
+        height: 50%;
+        margin-top: 10%;
+        margin-left: 25%;
+    }
+    input{
+        width: 50vh;
+    }
+</style>
+<body>
+    <form action="" onsubmit="return validation()" method="post">
+        {% csrf_token %}
+        <h1>Edit the Student details</h1>
+        <label for="">Name</label>
+        <input type="text" name="name" placeholder="Enter the students full name" value="{{std.name}}">
+        <br><br>
+        <label for="">Email</label>
+        <input type="email" name="email" placeholder="Enter the students email id" value="{{std.email}}">
+        <br><br>
+        <label for="">Address</label>
+        <input type="text" name="address" placeholder="Enter the students address" value="{{std.address}}">
+        <br><br>
+        <label for="">Phone Number</label>
+        <input type="number" name="phone" placeholder="Enter the students phone number"value="{{std.phone}}">
+        <br><br>
+        <label for="roomtype">Room Type</label>
+        <select name="roomtype" id="roomtype" class="form-select">
+            <option value="">-- Select Room Type --</option>
+            {% for room in rooms %}
+                <option value="{{ room.roomtype }}" {% if std.roomtype == room.roomtype %}selected{% endif %}>
+                    {{ room.get_roomtype_display }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <!-- <label for="">Room Number</label>
+        <input type="number" name="roomnumber" value="{{std.roomnumber}}">
+        <br><br> -->
+        <!-- <label for="">Password</label>
+        <input type="password" name="password" placeholder="Enter a strong password for the student" value="{{std.password}}">
+        <br><br> -->
+        <input type="submit" style="background-color: rgb(247, 131, 96); color: rgb(8, 8, 8) ;">
+        <br><br>
+    </form>
+    <br>
+    <a href="{% url 'student_list_view' %}"><button style="background-color: rgb(247, 131, 96); color: rgb(8, 8, 8) ;">Back</button></a>
+</body>
+</html>

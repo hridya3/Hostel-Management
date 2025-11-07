@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student List - Hridayam Hostel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #f5e2c8;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #4e2c18;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav img {
+      height: 50px;
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    nav img:hover {
+      transform: scale(1.05);
+    }
+
+    nav strong {
+      color: #fff3e0;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      margin: 0;
+    }
+
+    nav .nav-link {
+      color: #ffe0b2 !important;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    nav .nav-link:hover {
+      color: #ffffff !important;
+      transform: scale(1.05);
+    }
+
+    /* Page content */
+    .content {
+      margin-top: 100px;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #4e2c18;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 90%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: #fff8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(165, 42, 42, 0.3);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    th, td {
+      border-bottom: 1px solid #deb887;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #8b4513;
+      color: #fff3e0;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #f5e1c8;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn {
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-danger {
+      background-color: #a0522d !important;
+      border: none;
+    }
+
+    .btn-danger:hover {
+      background-color: #7a3c05 !important;
+    }
+
+    .btn-sm {
+      background-color: #8b4513 !important;
+      border: none;
+    }
+
+    .btn-sm:hover {
+      background-color: #5c2e00 !important;
+    }
+
+    .link {
+      display: inline-block;
+      margin-top: 25px;
+      text-decoration: none;
+      color: #b45f06;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .link:hover {
+      color: #7a3c05;
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'hostel_admin_view' %}">
+      <img src="{% static 'images/hridhayam logo.png' %}" alt="Logo" />
+      <strong>Hridayam</strong>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="nav-link" href="{% url 'hostel_admin_view' %}">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout_view' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Student List</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Room Number</th>
+          <th>Room Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in students_list %}
+        <tr>
+          <td>{{ i.id }}</td>
+          <td>{{ i.name }}</td>
+          <td>{{ i.email }}</td>
+          <td>{{ i.address }}</td>
+          <td>{{ i.phone }}</td>
+          <td>{{ i.roomnumber }}</td>
+          <td>{{ i.roomtype }}</td>
+          <td>
+            <a href="{% url 'delete_student' i.id %}" class="btn btn-danger btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</a>
+            <a href="{% url 'edit_student' i.id %}" class="btn btn-sm text-white">Edit</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="{% url 'hostel_admin_view' %}" class="link">Back to Admin Dashboard</a>
+  </div>
+
+</body>
+</html>
